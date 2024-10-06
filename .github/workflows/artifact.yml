@@ -21,6 +21,7 @@ jobs:
   
   download:
     runs-on: ubuntu-latest
+    needs: build
 
     steps: 
       - name: Download archive (text file)
