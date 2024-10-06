@@ -1,35 +1,27 @@
 name: Workflow Demo
-
-on: [push]
-
+'on':
+  - push
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-
-    - name: Create a text file
-      run: echo "Hello, world!" > hello.txt
-
-    - name: Archive text file
-      uses: actions/upload-artifact@v3
-      with:
-        name: hello-artifact
-        path: hello.txt
-  
-  download:
-    runs-on: ubuntu-latest
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Create a text file
+        run: 'echo "Hello, world!" > hello.txt'
+      - name: Archive text file
+        uses: actions/upload-artifact@v2
+        with:
+          name: hello-artifact
+          path: hello.txt
+  download: #added
     needs: build
-
-    steps: 
+    runs-on: ubuntu-latest
+    steps:
       - name: Download text file
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v2
         with:
           name: hello-artifact
           path: ./artifacts
-
-      - name: Display a text file
+      - name: Display content of the text file
         run: cat ./artifacts/hello.txt
-    
