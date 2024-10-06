@@ -24,7 +24,7 @@ jobs:
     needs: build
 
     steps: 
-      - name: Download archive (text file)
+      - name: Download text file
         uses: actions/download-artifact@v3
         with:
           name: hello-artifact
